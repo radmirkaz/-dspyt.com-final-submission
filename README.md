@@ -1,1 +1,0 @@
-# raifhack-ds-cup
