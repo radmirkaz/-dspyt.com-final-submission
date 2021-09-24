@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "Raiffeisen commercial hackathon"
+version = "0.0.1"
+description = "Simple benchmark for raiffeisen hackathon"
+authors = ["Raiffeisen bank"]
+
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+
+# standard includes websockets
+scikit-learn = "^0.24.2"
+pandas = "^1.1.5"
+numpy = "^1.19.5"
+lightgbm = "^3.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
