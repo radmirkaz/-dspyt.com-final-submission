@@ -7,6 +7,7 @@
 3. 10 фолдов
 4. Предикт домножаем на 0.94
 5. Ансамбль LGBMRegressor (0.75) + XGBRegressor (0.05) + CatBoostRegressor (0.2)
+6. Публичный лидерборд - 1.4062123483345823
 
 Файл работы - <code>raifhack-dspyt-com-final-solution.ipynb</code>
 Файо для отправки - <code>submission_final_raif</code>
