@@ -39,7 +39,7 @@
 
 Распределение предсказаний:
 
-![dist]()
+![dist](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/distribution.PNG?raw=true)
 
 
 
