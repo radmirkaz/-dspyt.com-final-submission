@@ -36,7 +36,7 @@
 
 Распределение недвижимости по России:
 
-![dist_of_estate]()
+![dist_of_estate](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/dist_of_estate.PNG?raw=true)
 
 Важность дефолтных фич:
 
