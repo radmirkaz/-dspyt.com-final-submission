@@ -4,5 +4,6 @@ pandas==1.1.5
 numpy==1.19.5
 xgboost
 catboost
+lightautoml
 
 
