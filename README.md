@@ -25,6 +25,7 @@
 
 ### Анализ
 
+![feature_importances](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/feature_importances.PNG?raw=true)
 
 
 
