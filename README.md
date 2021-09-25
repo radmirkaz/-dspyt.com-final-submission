@@ -1,6 +1,5 @@
 # RaifHack solution [dspyt.com]
 
-# Запуск
 ### Описание
 
 ### Запуск
