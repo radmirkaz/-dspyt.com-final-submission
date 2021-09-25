@@ -4,8 +4,9 @@
 
 1. Обучение на данных price_type=1
 2. Чистка данных (floor, categorical columns)
-3. Предикт домножаем на 0.94
-4. Ансамбль LGBMRegressor (0.75) + XGBRegressor (0.05) + CatBoostRegressor (0.2)
+3. 10 фолдов
+4. Предикт домножаем на 0.94
+5. Ансамбль LGBMRegressor (0.75) + XGBRegressor (0.05) + CatBoostRegressor (0.2)
 
 Файл работы - <code>raifhack-dspyt-com-final-solution.ipynb</code>
 Файо для отправки - <code>submission_final_raif</code>
@@ -25,6 +26,14 @@
 
 ### Анализ
 
+1. Пробовалось аггрегировать фичи, но это не дало результат.
+2. В колонке city хранятся данные не только о городах, но и о улицах, районах, метро, АССР....
+3. Очищение колонки floor дало наиболее ощутимый результат.
+4. Кросс валидация улучшает результат в среднем на 0.02
+5. Пробовались разные варианты ансамблирования, оптимальный представлен в описании (п.5)
+6. Пост процессинг, для удаления выбросов умножаем предикты соло моделей на 0.9, финального на 0.94
+
+Важность дефолтных фич:
 ![feature_importances](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/feature_importances.PNG?raw=true)
 
 
