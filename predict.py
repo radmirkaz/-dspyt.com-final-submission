@@ -1,6 +1,7 @@
 import argparse
 import logging.config
 import pandas as pd
+import numpy as np
 from raif_hack.features import prepare_categorical
 from traceback import format_exc
 
@@ -25,10 +26,10 @@ def parse_args():
         formatter_class=argparse.RawTextHelpFormatter,
     )
 
-    parser.add_argument("--test_data", "-d", type=str, dest="d", required=True, help="Путь до отложенной выборки")
-    parser.add_argument("--model_path", "-mp", type=str, dest="mp", required=True,
-                        help="Пусть до сериализованной ML модели")
-    parser.add_argument("--output", "-o", type=str, dest="o", required=True, help="Путь до выходного файла")
+    # parser.add_argument("--test_data", "-d", type=str, dest="d", required=True, help="Путь до отложенной выборки")
+    # parser.add_argument("--model_path", "-mp", type=str, dest="mp", required=True,
+    #                     help="Пусть до сериализованной ML модели")
+    # parser.add_argument("--output", "-o", type=str, dest="o", required=True, help="Путь до выходного файла")
 
     return parser.parse_args()
 
@@ -36,18 +37,21 @@ if __name__ == "__main__":
 
     try:
         logger.info('START predict.py')
-        args = vars(parse_args())
+        # args = vars(parse_args())
         logger.info('Load test df')
-        test_df = pd.read_csv(args['d'])
+        test_df = pd.read_csv('C:/Users/Radmir/Desktop/raifhack/data/test.csv')
         logger.info(f'Input shape: {test_df.shape}')
         test_df = prepare_categorical(test_df)
+        test_df['per_square_meter_price'] = np.ones(test_df.shape[0])
 
         logger.info('Load model')
-        model = BenchmarkModel.load(args['mp'])
-        logger.info('Predict')
-        test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+
+        for fold in range(5):
+            model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_cat.pkl')
+            logger.info('Predict')
+            test_df['per_square_meter_price'] += model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]) / 5
         logger.info('Save results')
-        test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
+        test_df[['id','per_square_meter_price']].to_csv('C:/Users/Radmir/Desktop/raifhack/submission_xgb.csv', index=False)
     except Exception as e:
         err = format_exc()
         logger.error(err)

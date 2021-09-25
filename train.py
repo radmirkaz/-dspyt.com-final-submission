@@ -1,17 +1,31 @@
 import argparse
 import logging.config
 import pandas as pd
+import numpy as np
 from traceback import format_exc
+from sklearn.cluster import KMeans
 
 from raif_hack.model import BenchmarkModel
 from raif_hack.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET
 from raif_hack.utils import PriceTypeEnum
 from raif_hack.metrics import metrics_stat
 from raif_hack.features import prepare_categorical
+from sklearn.model_selection import KFold
+from sklearn.preprocessing import MinMaxScaler
+from datetime import timedelta
+
+from tensorflow import keras
+from keras.backend import sigmoid
+def swish(x, beta = 1):
+    return (x * sigmoid(beta * x))
+
+from keras.utils.generic_utils import get_custom_objects
+from keras.layers import Activation
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
+nnn = CATEGORICAL_OHE_FEATURES + NUM_FEATURES
 
 def parse_args():
 
@@ -26,42 +40,49 @@ def parse_args():
     """,
         formatter_class=argparse.RawTextHelpFormatter,
     )
-
-    parser.add_argument("--train_data", "-d", type=str, dest="d", required=True, help="Путь до обучающего датасета")
-    parser.add_argument("--model_path", "-mp", type=str, dest="mp", required=True, help="Куда сохранить обученную ML модель")
+    #
+    # parser.add_argument("--train_data", "-d", type=str, dest="d", required=True, help="Путь до обучающего датасета")
+    # parser.add_argument("--model_path", "-mp", type=str, dest="mp", required=True, help="Куда сохранить обученную ML модель")
 
     return parser.parse_args()
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
+     # making agg features
     try:
-        logger.info('START train.py')
-        args = vars(parse_args())
-        logger.info('Load train df')
-        train_df = pd.read_csv(args['d'])
+        # logger.info('START train.py')
+        # args = vars(parse_args())
+        # logger.info('Load train df')
+        train_df = pd.read_csv('C:/Users/Radmir/Desktop/raifhack/data/train.csv')
         logger.info(f'Input shape: {train_df.shape}')
         train_df = prepare_categorical(train_df)
 
-        X_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
-        y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
-        X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
-        y_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
-        logger.info(f'X_offer {X_offer.shape}  y_offer {y_offer.shape}\tX_manual {X_manual.shape} y_manual {y_manual.shape}')
-        model = BenchmarkModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
-                                  ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
-        logger.info('Fit model')
-        model.fit(X_offer, y_offer, X_manual, y_manual)
-        logger.info('Save model')
-        model.save(args['mp'])
+        kfold = KFold(n_splits=5, shuffle=True, random_state=42)
 
-        predictions_offer = model.predict(X_offer)
-        metrics = metrics_stat(y_offer.values, predictions_offer/(1+model.corr_coef)) # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
-        logger.info(f'Metrics stat for training data with offers prices: {metrics}')
+        for fold, (trn_ind, val_ind) in enumerate(kfold.split(train_df)):
+            X_offer = train_df.iloc[trn_ind][train_df.price_type == PriceTypeEnum.OFFER_PRICE][
+                NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]
+            y_offer = train_df.iloc[trn_ind][train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
+            X_manual = train_df.iloc[val_ind][train_df.price_type == PriceTypeEnum.MANUAL_PRICE][
+                NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]
+            y_manual = train_df.iloc[val_ind][train_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
+            model = BenchmarkModel(numerical_features=NUM_FEATURES,
+                                   ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
+                                   # ste_categorical_features=CATEGORICAL_STE_FEATURES,
+                                   model_params=MODEL_PARAMS)
 
-        predictions_manual = model.predict(X_manual)
-        metrics = metrics_stat(y_manual.values, predictions_manual)
-        logger.info(f'Metrics stat for training data with manual prices: {metrics}')
+            print('fitting')
+            model.fit(X_offer, y_offer, X_manual, y_manual)
+            print('saving')
+            model.save(f'model{fold}_lgb_ohe.pkl')
 
+            predictions_offer = model.predict(X_offer)
+            metrics = metrics_stat(y_offer.values, predictions_offer / (
+                        1 + model.corr_coef))  # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
+            print(metrics)
+            predictions_manual = model.predict(X_manual)
+            metrics = metrics_stat(y_manual.values, predictions_manual)
+            print(metrics)
 
     except Exception as e:
         err = format_exc()
