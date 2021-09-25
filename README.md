@@ -1,9 +1,9 @@
 # RaifHack solution [dspyt.com]
 
 # Запуск
-## Вариант с poetry
+### Описание
 
-## Вариант с requirements.txt
+### Запуск
 <ol>
     <li> убедиться, что у вас стоит python3.6 или выше </li>
     <li> установить зависимости:
