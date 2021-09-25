@@ -1,9 +1,11 @@
 import argparse
 import logging.config
+
+import catboost
 import pandas as pd
-import numpy as np
 from traceback import format_exc
-from sklearn.cluster import KMeans
+
+import xgboost
 
 from raif_hack.model import BenchmarkModel
 from raif_hack.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET
@@ -11,16 +13,8 @@ from raif_hack.utils import PriceTypeEnum
 from raif_hack.metrics import metrics_stat
 from raif_hack.features import prepare_categorical
 from sklearn.model_selection import KFold
-from sklearn.preprocessing import MinMaxScaler
-from datetime import timedelta
-
-from tensorflow import keras
-from keras.backend import sigmoid
-def swish(x, beta = 1):
-    return (x * sigmoid(beta * x))
-
-from keras.utils.generic_utils import get_custom_objects
-from keras.layers import Activation
+import lightgbm
+from raif_hack.settings import xgb_params
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -69,16 +63,52 @@ if __name__ == "__main__":
             model = BenchmarkModel(numerical_features=NUM_FEATURES,
                                    ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                    # ste_categorical_features=CATEGORICAL_STE_FEATURES,
-                                   model_params=MODEL_PARAMS)
+                                   model_params=MODEL_PARAMS, model=lightgbm.LGBMRegressor)
 
             print('fitting')
             model.fit(X_offer, y_offer, X_manual, y_manual)
             print('saving')
-            model.save(f'model{fold}_lgb_ohe.pkl')
+            model.save(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_lgb_ohe.pkl')
 
             predictions_offer = model.predict(X_offer)
             metrics = metrics_stat(y_offer.values, predictions_offer / (
                         1 + model.corr_coef))  # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
+            print(metrics)
+            predictions_manual = model.predict(X_manual)
+            metrics = metrics_stat(y_manual.values, predictions_manual)
+            print(metrics)
+
+            model = BenchmarkModel(numerical_features=NUM_FEATURES,
+                                   ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
+                                   # ste_categorical_features=CATEGORICAL_STE_FEATURES,
+                                   model_params=xgb_params, model=xgboost.XGBRegressor)
+
+            print('fitting')
+            model.fit(X_offer, y_offer, X_manual, y_manual)
+            print('saving')
+            model.save(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_xgb_ohe.pkl')
+
+            predictions_offer = model.predict(X_offer)
+            metrics = metrics_stat(y_offer.values, predictions_offer / (
+                    1 + model.corr_coef))  # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
+            print(metrics)
+            predictions_manual = model.predict(X_manual)
+            metrics = metrics_stat(y_manual.values, predictions_manual)
+            print(metrics)
+
+            model = BenchmarkModel(numerical_features=NUM_FEATURES,
+                                   ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
+                                   # ste_categorical_features=CATEGORICAL_STE_FEATURES,
+                                   model=catboost.CatBoostRegressor)
+
+            print('fitting')
+            model.fit(X_offer, y_offer, X_manual, y_manual)
+            print('saving')
+            model.save(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_cat_ohe.pkl')
+
+            predictions_offer = model.predict(X_offer)
+            metrics = metrics_stat(y_offer.values, predictions_offer / (
+                    1 + model.corr_coef))  # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
             print(metrics)
             predictions_manual = model.predict(X_manual)
             metrics = metrics_stat(y_manual.values, predictions_manual)

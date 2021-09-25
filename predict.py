@@ -47,11 +47,33 @@ if __name__ == "__main__":
         logger.info('Load model')
 
         for fold in range(5):
-            model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_cat.pkl')
+            model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_lgb_ohe.pkl')
             logger.info('Predict')
             test_df['per_square_meter_price'] += model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]) / 5
         logger.info('Save results')
-        test_df[['id','per_square_meter_price']].to_csv('C:/Users/Radmir/Desktop/raifhack/submission_xgb.csv', index=False)
+        test_df[['id','per_square_meter_price']].to_csv('C:/Users/Radmir/Desktop/raifhack/submission_lgb_ohe.csv', index=False)
+
+        logger.info('Load model')
+
+        for fold in range(5):
+            model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_xgb_ohe.pkl')
+            logger.info('Predict')
+            test_df['per_square_meter_price'] += model.predict(
+                test_df[NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]) / 5
+        logger.info('Save results')
+        test_df[['id', 'per_square_meter_price']].to_csv('C:/Users/Radmir/Desktop/raifhack/submission_xgb_ohe.csv',
+                                                         index=False)
+
+        logger.info('Load model')
+
+        for fold in range(5):
+            model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model/model{fold}_cat_ohe.pkl')
+            logger.info('Predict')
+            test_df['per_square_meter_price'] += model.predict(
+                test_df[NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]) / 5
+        logger.info('Save results')
+        test_df[['id', 'per_square_meter_price']].to_csv('C:/Users/Radmir/Desktop/raifhack/submission_cat_ohe.csv',
+                                                         index=False)
     except Exception as e:
         err = format_exc()
         logger.error(err)

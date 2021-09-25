@@ -4762,3 +4762,241 @@ Traceback (most recent call last):
 ValueError: A given column is not a column of the dataframe
 
 2021-09-25 15:52:41,205 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:04:03,437 __main__     INFO     END train.py
+2021-09-25 16:05:20,320 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:05:31,018 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 77, in <module>
+    model.save(f'C:/Users/Radmir/Desktop/raifhack/models/model{fold}_xgb_ohe.pkl')
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 109, in save
+    with open(path, "wb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/Radmir/Desktop/raifhack/models/model0_xgb_ohe.pkl'
+
+2021-09-25 16:05:52,893 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:06:03,218 __main__     INFO     START predict.py
+2021-09-25 16:06:03,218 __main__     INFO     Load test df
+2021-09-25 16:06:03,259 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:06:03,262 __main__     INFO     Load model
+2021-09-25 16:06:03,316 __main__     INFO     Predict
+2021-09-25 16:06:03,429 __main__     INFO     Predict
+2021-09-25 16:06:03,537 __main__     INFO     Predict
+2021-09-25 16:06:03,647 __main__     INFO     Predict
+2021-09-25 16:06:03,764 __main__     INFO     Predict
+2021-09-25 16:06:03,833 __main__     INFO     Save results
+2021-09-25 16:06:03,843 __main__     INFO     END predict.py
+2021-09-25 16:06:20,260 __main__     INFO     START predict.py
+2021-09-25 16:06:20,260 __main__     INFO     Load test df
+2021-09-25 16:06:20,294 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:06:20,298 __main__     INFO     Load model
+2021-09-25 16:06:20,338 __main__     INFO     Predict
+2021-09-25 16:06:20,453 __main__     INFO     Predict
+2021-09-25 16:06:20,568 __main__     INFO     Predict
+2021-09-25 16:06:20,685 __main__     INFO     Predict
+2021-09-25 16:06:20,797 __main__     INFO     Predict
+2021-09-25 16:06:20,864 __main__     INFO     Save results
+2021-09-25 16:06:20,875 __main__     INFO     END predict.py
+2021-09-25 16:06:40,157 __main__     INFO     START predict.py
+2021-09-25 16:06:40,157 __main__     INFO     Load test df
+2021-09-25 16:06:40,192 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:06:40,195 __main__     INFO     Load model
+2021-09-25 16:06:40,196 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/predict.py", line 50, in <module>
+    model = BenchmarkModel.load(f'C:/Users/Radmir/Desktop/raifhack/model{fold}_xgb.pkl')
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 119, in load
+    with open(path, "rb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/Radmir/Desktop/raifhack/model0_xgb.pkl'
+
+2021-09-25 16:06:50,224 __main__     INFO     START predict.py
+2021-09-25 16:06:50,224 __main__     INFO     Load test df
+2021-09-25 16:06:50,262 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:06:50,267 __main__     INFO     Load model
+2021-09-25 16:06:50,333 __main__     INFO     Predict
+2021-09-25 16:06:50,337 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/predict.py", line 52, in <module>
+    test_df['per_square_meter_price'] += model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]) / 5
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 94, in predict
+    predictions = self.pipeline.predict(X)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\utils\metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\compose\_column_transformer.py", line 556, in transform
+    self._check_n_features(X, reset=False)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\base.py", line 365, in _check_n_features
+    raise ValueError(
+ValueError: X has 68 features, but ColumnTransformer is expecting 70 features as input.
+
+2021-09-25 16:06:55,115 __main__     INFO     END train.py
+2021-09-25 16:08:16,330 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:08:26,455 __main__     INFO     START predict.py
+2021-09-25 16:08:26,456 __main__     INFO     Load test df
+2021-09-25 16:08:26,502 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:08:26,507 __main__     INFO     Load model
+2021-09-25 16:08:26,581 __main__     INFO     Predict
+2021-09-25 16:08:26,626 __main__     INFO     Predict
+2021-09-25 16:08:26,663 __main__     INFO     Predict
+2021-09-25 16:08:26,702 __main__     INFO     Predict
+2021-09-25 16:08:26,738 __main__     INFO     Predict
+2021-09-25 16:08:26,755 __main__     INFO     Save results
+2021-09-25 16:08:26,769 __main__     INFO     END predict.py
+2021-09-25 16:10:33,869 __main__     INFO     END train.py
+2021-09-25 16:10:50,574 __main__     INFO     START predict.py
+2021-09-25 16:10:50,574 __main__     INFO     Load test df
+2021-09-25 16:10:50,605 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:10:50,608 __main__     INFO     Load model
+2021-09-25 16:10:50,610 __main__     INFO     Predict
+2021-09-25 16:10:50,687 __main__     INFO     Predict
+2021-09-25 16:10:50,766 __main__     INFO     Predict
+2021-09-25 16:10:50,843 __main__     INFO     Predict
+2021-09-25 16:10:50,922 __main__     INFO     Predict
+2021-09-25 16:10:50,999 __main__     INFO     Save results
+2021-09-25 16:10:51,009 __main__     INFO     END predict.py
+2021-09-25 16:18:26,193 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:18:26,600 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 75, in <module>
+    model = BenchmarkModel(numerical_features=NUM_FEATURES,
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 53, in __init__
+    self.model = model(**model_params)
+TypeError: 'LGBMRegressor' object is not callable
+
+2021-09-25 16:19:29,098 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:21:56,554 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 111, in <module>
+    model = BenchmarkModel(numerical_features=NUM_FEATURES,
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 53, in __init__
+    self.model = model(**model_params)
+TypeError: type object argument after ** must be a mapping, not NoneType
+
+2021-09-25 16:30:27,989 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:30:28,777 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 81, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 83, in fit
+    self.pipeline.fit(X_offer, y_offer)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 734, in fit
+    super(LGBMRegressor, self).fit(X, y, sample_weight=sample_weight,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 594, in fit
+    self._Booster = train(params, train_set,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\engine.py", line 228, in train
+    booster = Booster(params=params, train_set=train_set)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 1694, in __init__
+    params_str = param_dict_to_str(params)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 140, in param_dict_to_str
+    raise TypeError('Unknown type of parameter:%s, got:%s'
+TypeError: Unknown type of parameter:boosting_type, got:dict
+
+2021-09-25 16:31:07,814 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:31:07,905 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 67, in <module>
+    print(**xgb_params)
+TypeError: print() takes at most 4 keyword arguments (6 given)
+
+2021-09-25 16:31:37,487 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:31:38,270 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 82, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 83, in fit
+    self.pipeline.fit(X_offer, y_offer)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 734, in fit
+    super(LGBMRegressor, self).fit(X, y, sample_weight=sample_weight,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 594, in fit
+    self._Booster = train(params, train_set,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\engine.py", line 228, in train
+    booster = Booster(params=params, train_set=train_set)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 1694, in __init__
+    params_str = param_dict_to_str(params)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 140, in param_dict_to_str
+    raise TypeError('Unknown type of parameter:%s, got:%s'
+TypeError: Unknown type of parameter:boosting_type, got:dict
+
+2021-09-25 16:32:06,894 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:32:07,687 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 82, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 83, in fit
+    self.pipeline.fit(X_offer, y_offer)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 734, in fit
+    super(LGBMRegressor, self).fit(X, y, sample_weight=sample_weight,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\sklearn.py", line 594, in fit
+    self._Booster = train(params, train_set,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\engine.py", line 228, in train
+    booster = Booster(params=params, train_set=train_set)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 1694, in __init__
+    params_str = param_dict_to_str(params)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\lightgbm\basic.py", line 140, in param_dict_to_str
+    raise TypeError('Unknown type of parameter:%s, got:%s'
+TypeError: Unknown type of parameter:boosting_type, got:dict
+
+2021-09-25 16:34:23,015 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:36:40,224 __main__     ERROR    Traceback (most recent call last):
+  File "C:/Users/Radmir/Desktop/raifhack/train.py", line 99, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "C:\Users\Radmir\Desktop\raifhack\raif_hack\model.py", line 88, in fit
+    self.pipeline.fit(X_offer, y_offer)
+  File "C:\Users\Radmir\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\core.py", line 436, in inner_f
+    return f(**kwargs)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\sklearn.py", line 736, in fit
+    self._Booster = train(
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\training.py", line 189, in train
+    bst = _train_internal(params, dtrain,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\training.py", line 81, in _train_internal
+    bst.update(dtrain, i, obj)
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\core.py", line 1499, in update
+    _check_call(_LIB.XGBoosterUpdateOneIter(self.handle,
+  File "C:\Users\Radmir\AppData\Roaming\Python\Python38\site-packages\xgboost\core.py", line 210, in _check_call
+    raise XGBoostError(py_str(_LIB.XGBGetLastError()))
+xgboost.core.XGBoostError: [16:36:40] C:\Users\Administrator\workspace\xgboost-win64_release_1.4.0\src\objective\objective.cc:26: Unknown objective function: `{'eta': 0.05, 'max_depth': 5, 'subsample': 0.7, 'colsample_bytree': 0.7, 'objective': 'reg:linear', 'eval_metric': 'rmse'}`
+Objective candidate: survival:aft
+Objective candidate: binary:hinge
+Objective candidate: multi:softmax
+Objective candidate: multi:softprob
+Objective candidate: rank:pairwise
+Objective candidate: rank:ndcg
+Objective candidate: rank:map
+Objective candidate: count:poisson
+Objective candidate: survival:cox
+Objective candidate: reg:gamma
+Objective candidate: reg:tweedie
+Objective candidate: reg:squarederror
+Objective candidate: reg:squaredlogerror
+Objective candidate: reg:logistic
+Objective candidate: reg:pseudohubererror
+Objective candidate: binary:logistic
+Objective candidate: binary:logitraw
+Objective candidate: reg:linear
+
+
+2021-09-25 16:37:37,625 __main__     INFO     Input shape: (279792, 77)
+2021-09-25 16:52:06,175 __main__     INFO     END train.py
+2021-09-25 16:52:28,294 __main__     INFO     START predict.py
+2021-09-25 16:52:28,294 __main__     INFO     Load test df
+2021-09-25 16:52:28,325 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 16:52:28,329 __main__     INFO     Load model
+2021-09-25 16:52:28,363 __main__     INFO     Predict
+2021-09-25 16:52:28,450 __main__     INFO     Predict
+2021-09-25 16:52:28,541 __main__     INFO     Predict
+2021-09-25 16:52:28,628 __main__     INFO     Predict
+2021-09-25 16:52:28,703 __main__     INFO     Predict
+2021-09-25 16:52:28,744 __main__     INFO     Save results
+2021-09-25 16:52:28,755 __main__     INFO     Load model
+2021-09-25 16:52:28,813 __main__     INFO     Predict
+2021-09-25 16:52:28,842 __main__     INFO     Predict
+2021-09-25 16:52:28,870 __main__     INFO     Predict
+2021-09-25 16:52:28,897 __main__     INFO     Predict
+2021-09-25 16:52:28,924 __main__     INFO     Predict
+2021-09-25 16:52:28,935 __main__     INFO     Save results
+2021-09-25 16:52:28,944 __main__     INFO     Load model
+2021-09-25 16:52:28,946 __main__     INFO     Predict
+2021-09-25 16:52:29,026 __main__     INFO     Predict
+2021-09-25 16:52:29,102 __main__     INFO     Predict
+2021-09-25 16:52:29,180 __main__     INFO     Predict
+2021-09-25 16:52:29,256 __main__     INFO     Predict
+2021-09-25 16:52:29,331 __main__     INFO     Save results
+2021-09-25 16:52:29,341 __main__     INFO     END predict.py
