@@ -34,7 +34,12 @@
 6. Пост процессинг, для удаления выбросов умножаем предикты соло моделей на 0.9, финального на 0.94
 
 Важность дефолтных фич:
+
 ![feature_importances](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/feature_importances.PNG?raw=true)
+
+Распределение предсказаний:
+
+![dist]()
 
 
 
