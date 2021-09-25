@@ -55,6 +55,10 @@
 ![feature_importances](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/feature_importances.PNG?raw=true)
 
 
+## Идеи по улучшению:
 
+1. Ипользовать TabNet, NN или AutoML
+2. Генерация гео-факторов
+3. Попробовать другие кросс-валидационные функции
 
 
