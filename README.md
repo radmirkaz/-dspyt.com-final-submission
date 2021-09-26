@@ -54,6 +54,10 @@
 
 ![feature_importances](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/feature_importances.PNG?raw=true)
 
+Код на каггле: https://www.kaggle.com/pavfedotov/raifhack-dspyt-com-final-solution
+
+Код для генерации картинок на каггле: https://www.kaggle.com/pavfedotov/raiff21-eda
+
 
 ## Идеи по улучшению:
 
