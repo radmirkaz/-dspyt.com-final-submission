@@ -38,11 +38,11 @@
 
 ![dist_of_estate](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/dist_of_estate.PNG?raw=true)
 
-Распределение цен:
+Распределение цен в сабмишине:
 
 ![dist](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/distribution.PNG?raw=true)
 
-Распределение расстояние недвижимости до центра города:
+Распределение цен в трейне:
 
 ![dist_city](https://github.com/RadmirZ/-dspyt.com-final-submission/blob/main/%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F.PNG?raw=true)
 
